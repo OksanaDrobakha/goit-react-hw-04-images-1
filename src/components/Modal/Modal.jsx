@@ -6,7 +6,6 @@ const rootModal = document.querySelector('#root-modal');
 
 export default function Modal({ onClose, children }) {
   useEffect(() => {
-    const overlay = document.querySelector('.Overlay');
     const htmlEl = document.querySelector('html');
 
     const onKeyDown = e => {
@@ -15,25 +14,25 @@ export default function Modal({ onClose, children }) {
       }
     };
 
-    const onBackdropClick = e => {
-      if (e.target === e.currentTarget) {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    overlay.addEventListener('click', onBackdropClick);
+    document.addEventListener('keydown', onKeyDown);
     htmlEl.style.overflow = 'hidden';
 
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      overlay.removeEventListener('click', onBackdropClick);
+      document.removeEventListener('keydown', onKeyDown);
       htmlEl.style.overflow = 'visible';
     };
   }, [onClose]);
 
+  const onBackdropClick = e => {
+    console.log('currentTarget:', e.currentTarget);
+    console.log('target:', e.target);
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  };
+
   return createPortal(
-    <div className="Overlay">
+    <div className="Overlay" onClick={onBackdropClick}>
       <div className="Modal">{children}</div>
     </div>,
     rootModal

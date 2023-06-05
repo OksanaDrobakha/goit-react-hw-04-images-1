@@ -71,7 +71,6 @@ export default function App() {
   };
 
   const onLoadMore = () => {
-    setStatus('pending');
     setPage(prevPage => prevPage + 1);
   };
 
@@ -96,9 +95,11 @@ export default function App() {
           Load More
         </Button>
       )}
-      <div className="loading">
-        <Loader />
-      </div>
+      {status === 'pending' && (
+        <div className="loading">
+          <Loader />
+        </div>
+      )}
       <ToastContainer />
     </div>
   );

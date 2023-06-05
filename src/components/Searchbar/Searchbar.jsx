@@ -3,8 +3,8 @@ import { FcSearch } from 'react-icons/fc';
 import PropTypes from 'prop-types';
 
 const Searchbar = ({ onSubmit }) => {
-  const handleSubmit = async (values, { setSubmitting }) => {
-    await onSubmit(values);
+  const handleSubmit = async ({ search }, { setSubmitting }) => {
+    await onSubmit(search);
     setSubmitting(false);
   };
 
