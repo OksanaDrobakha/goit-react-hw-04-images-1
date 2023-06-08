@@ -17,8 +17,13 @@ export default function ImageGalleryItem({ item }) {
   };
 
   return (
-    <li className="ImageGalleryItem" onClick={handleOpenModal}>
-      <img src={webformatURL} alt={tags} className="ImageGalleryItem-image" />
+    <li className="ImageGalleryItem">
+      <img
+        src={webformatURL}
+        alt={tags}
+        className="ImageGalleryItem-image"
+        onClick={handleOpenModal}
+      />
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
           <img src={largeImageURL} alt={tags} loading="lazy" />;
