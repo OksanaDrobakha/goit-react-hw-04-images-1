@@ -8,15 +8,19 @@ export default function ImageGalleryItem({ item }) {
 
   const { webformatURL, largeImageURL, tags } = item;
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <li className="ImageGalleryItem" onClick={() => setIsModalOpen(true)}>
+    <li className="ImageGalleryItem" onClick={handleOpenModal}>
       <img src={webformatURL} alt={tags} className="ImageGalleryItem-image" />
       {isModalOpen && (
-        <Modal
-          onClose={() => {
-            setIsModalOpen(false);
-          }}
-        >
+        <Modal onClose={handleCloseModal}>
           <img src={largeImageURL} alt={tags} loading="lazy" />;
         </Modal>
       )}
